@@ -1,0 +1,649 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		/* App Files */
+		A1000001001 /* ScaleKeeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000 /* ScaleKeeperApp.swift */; };
+		A1000002HUB2 /* QuickActionsHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002HUB /* QuickActionsHubView.swift */; };
+		A1000002001 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000 /* AppState.swift */; };
+		A1000003001 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000003000 /* RootView.swift */; };
+
+		/* Feature Files */
+		A1000010001 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000010000 /* DashboardView.swift */; };
+		A1000011001 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000011000 /* DashboardViewModel.swift */; };
+		A1000012001 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000012000 /* CollectionView.swift */; };
+		A1000013001 /* AddAnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000013000 /* AddAnimalView.swift */; };
+		A1000014001 /* AnimalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000014000 /* AnimalDetailView.swift */; };
+		A1000015001 /* FeedingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000015000 /* FeedingView.swift */; };
+		A1BATCH00002 /* BatchFeedingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BATCH00001 /* BatchFeedingView.swift */; };
+		A1000016001 /* BreedingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000016000 /* BreedingView.swift */; };
+		A1000017001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000017000 /* SettingsView.swift */; };
+		A1000018001 /* FeedingForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000018000 /* FeedingForms.swift */; };
+		A1000019001 /* HealthForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000019000 /* HealthForms.swift */; };
+		A100001A001 /* BreedingForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001A000 /* BreedingForms.swift */; };
+		A100001B001 /* PhotoViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001B000 /* PhotoViews.swift */; };
+		A100001C001 /* SettingsSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001C000 /* SettingsSubviews.swift */; };
+		A100001D001 /* EnclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001D000 /* EnclosureView.swift */; };
+		A100001E001 /* EnclosureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001E000 /* EnclosureDetailView.swift */; };
+		A100001F001 /* EnclosureForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001F000 /* EnclosureForms.swift */; };
+		A1000020001M /* MedicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000020000M /* MedicationView.swift */; };
+		A1000021001M /* MedicationForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000021000M /* MedicationForms.swift */; };
+		A1000022001B /* BiometricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000022000B /* BiometricsView.swift */; };
+		A1000023001B /* BiometricsForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000023000B /* BiometricsForms.swift */; };
+		A1000024001BR /* BrumationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000024000BR /* BrumationView.swift */; };
+		A1000025001BR /* BrumationForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000025000BR /* BrumationForms.swift */; };
+		A1000026001FS /* FeedingScheduleForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000026000FS /* FeedingScheduleForms.swift */; };
+		A1000027001CAL /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000027000CAL /* CalendarView.swift */; };
+		A1000028001CARE /* CareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000028000CARE /* CareView.swift */; };
+		A1000029001QN /* QuickNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000029000QN /* QuickNoteView.swift */; };
+		A100002A001TO /* ThemeOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100002A000TO /* ThemeOnboardingView.swift */; };
+
+		/* Resources */
+		A1000020001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000020000 /* Assets.xcassets */; };
+
+		/* Package Dependencies */
+		A1000030001 /* ScaleCore in Frameworks */ = {isa = PBXBuildFile; productRef = A1000030000 /* ScaleCore */; };
+		A1000031001 /* ScaleUI in Frameworks */ = {isa = PBXBuildFile; productRef = A1000031000 /* ScaleUI */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		/* App Target */
+		A1000000000 /* ScaleKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScaleKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+
+		/* Source Files */
+		A1000001000 /* ScaleKeeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleKeeperApp.swift; sourceTree = "<group>"; };
+		A1000002HUB /* QuickActionsHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionsHubView.swift; sourceTree = "<group>"; };
+		A1000002000 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		A1000003000 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+
+		/* Feature Files */
+		A1000010000 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		A1000011000 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		A1000012000 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		A1000013000 /* AddAnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnimalView.swift; sourceTree = "<group>"; };
+		A1000014000 /* AnimalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailView.swift; sourceTree = "<group>"; };
+		A1000015000 /* FeedingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedingView.swift; sourceTree = "<group>"; };
+		A1BATCH00001 /* BatchFeedingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchFeedingView.swift; sourceTree = "<group>"; };
+		A1000016000 /* BreedingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedingView.swift; sourceTree = "<group>"; };
+		A1000017000 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A1000018000 /* FeedingForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedingForms.swift; sourceTree = "<group>"; };
+		A1000019000 /* HealthForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthForms.swift; sourceTree = "<group>"; };
+		A100001A000 /* BreedingForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedingForms.swift; sourceTree = "<group>"; };
+		A100001B000 /* PhotoViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViews.swift; sourceTree = "<group>"; };
+		A100001C000 /* SettingsSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSubviews.swift; sourceTree = "<group>"; };
+		A100001D000 /* EnclosureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnclosureView.swift; sourceTree = "<group>"; };
+		A100001E000 /* EnclosureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnclosureDetailView.swift; sourceTree = "<group>"; };
+		A100001F000 /* EnclosureForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnclosureForms.swift; sourceTree = "<group>"; };
+		A1000020000M /* MedicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationView.swift; sourceTree = "<group>"; };
+		A1000021000M /* MedicationForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationForms.swift; sourceTree = "<group>"; };
+		A1000022000B /* BiometricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricsView.swift; sourceTree = "<group>"; };
+		A1000023000B /* BiometricsForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricsForms.swift; sourceTree = "<group>"; };
+		A1000024000BR /* BrumationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrumationView.swift; sourceTree = "<group>"; };
+		A1000025000BR /* BrumationForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrumationForms.swift; sourceTree = "<group>"; };
+		A1000026000FS /* FeedingScheduleForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedingScheduleForms.swift; sourceTree = "<group>"; };
+		A1000027000CAL /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		A1000028000CARE /* CareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareView.swift; sourceTree = "<group>"; };
+		A1000029000QN /* QuickNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNoteView.swift; sourceTree = "<group>"; };
+		A100002A000TO /* ThemeOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeOnboardingView.swift; sourceTree = "<group>"; };
+
+		/* Resources */
+		A1000020000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+
+		/* Config Files */
+		A1000021000 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1000022000 /* ScaleKeeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScaleKeeper.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1000000100 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000030001 /* ScaleCore in Frameworks */,
+				A1000031001 /* ScaleUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1000000200 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000300 /* ScaleKeeper */,
+				A1000000400 /* Packages */,
+				A1000000500 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1000000300 /* ScaleKeeper */ = {
+			isa = PBXGroup;
+			children = (
+				A1000001000 /* ScaleKeeperApp.swift */,
+				A1000021000 /* Info.plist */,
+				A1000022000 /* ScaleKeeper.entitlements */,
+				A1000000310 /* App */,
+				A1000000320 /* Features */,
+				A1000000330 /* Resources */,
+			);
+			path = ScaleKeeper;
+			sourceTree = "<group>";
+		};
+		A1000000310 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A1000002000 /* AppState.swift */,
+				A1000002HUB /* QuickActionsHubView.swift */,
+				A1000003000 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A1000000320 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000321 /* Dashboard */,
+				A1000000322 /* Collection */,
+				A1000000323 /* AnimalDetail */,
+				A100000032B /* Calendar */,
+				A100000032C /* Care */,
+				A1000000324 /* Feeding */,
+				A1000000325 /* Breeding */,
+				A1000000326 /* Settings */,
+				A1000000327 /* Enclosures */,
+				A1000000328 /* Medications */,
+				A1000000329 /* Biometrics */,
+				A100000032A /* Brumation */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A100000032B /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				A1000027000CAL /* CalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		A100000032C /* Care */ = {
+			isa = PBXGroup;
+			children = (
+				A1000028000CARE /* CareView.swift */,
+				A1000029000QN /* QuickNoteView.swift */,
+				A100002A000TO /* ThemeOnboardingView.swift */,
+			);
+			path = Care;
+			sourceTree = "<group>";
+		};
+		A1000000321 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				A1000010000 /* DashboardView.swift */,
+				A1000011000 /* DashboardViewModel.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		A1000000322 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				A1000012000 /* CollectionView.swift */,
+				A1000013000 /* AddAnimalView.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		A1000000323 /* AnimalDetail */ = {
+			isa = PBXGroup;
+			children = (
+				A1000014000 /* AnimalDetailView.swift */,
+				A1000019000 /* HealthForms.swift */,
+				A100001B000 /* PhotoViews.swift */,
+			);
+			path = AnimalDetail;
+			sourceTree = "<group>";
+		};
+		A1000000324 /* Feeding */ = {
+			isa = PBXGroup;
+			children = (
+				A1000015000 /* FeedingView.swift */,
+				A1BATCH00001 /* BatchFeedingView.swift */,
+				A1000018000 /* FeedingForms.swift */,
+				A1000026000FS /* FeedingScheduleForms.swift */,
+			);
+			path = Feeding;
+			sourceTree = "<group>";
+		};
+		A1000000325 /* Breeding */ = {
+			isa = PBXGroup;
+			children = (
+				A1000016000 /* BreedingView.swift */,
+				A100001A000 /* BreedingForms.swift */,
+			);
+			path = Breeding;
+			sourceTree = "<group>";
+		};
+		A1000000326 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A1000017000 /* SettingsView.swift */,
+				A100001C000 /* SettingsSubviews.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A1000000327 /* Enclosures */ = {
+			isa = PBXGroup;
+			children = (
+				A100001D000 /* EnclosureView.swift */,
+				A100001E000 /* EnclosureDetailView.swift */,
+				A100001F000 /* EnclosureForms.swift */,
+			);
+			path = Enclosures;
+			sourceTree = "<group>";
+		};
+		A1000000328 /* Medications */ = {
+			isa = PBXGroup;
+			children = (
+				A1000020000M /* MedicationView.swift */,
+				A1000021000M /* MedicationForms.swift */,
+			);
+			path = Medications;
+			sourceTree = "<group>";
+		};
+		A1000000329 /* Biometrics */ = {
+			isa = PBXGroup;
+			children = (
+				A1000022000B /* BiometricsView.swift */,
+				A1000023000B /* BiometricsForms.swift */,
+			);
+			path = Biometrics;
+			sourceTree = "<group>";
+		};
+		A100000032A /* Brumation */ = {
+			isa = PBXGroup;
+			children = (
+				A1000024000BR /* BrumationView.swift */,
+				A1000025000BR /* BrumationForms.swift */,
+			);
+			path = Brumation;
+			sourceTree = "<group>";
+		};
+		A1000000330 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A1000020000 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A1000000400 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		A1000000500 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000 /* ScaleKeeper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1000000600 /* ScaleKeeper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000000700 /* Build configuration list for PBXNativeTarget "ScaleKeeper" */;
+			buildPhases = (
+				A1000000610 /* Sources */,
+				A1000000100 /* Frameworks */,
+				A1000000620 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScaleKeeper;
+			packageProductDependencies = (
+				A1000030000 /* ScaleCore */,
+				A1000031000 /* ScaleUI */,
+			);
+			productName = ScaleKeeper;
+			productReference = A1000000000 /* ScaleKeeper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1000000800 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A1000000600 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A1000000900 /* Build configuration list for PBXProject "ScaleKeeper" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1000000200;
+			packageReferences = (
+				A1000040000 /* XCLocalSwiftPackageReference "Packages/ScaleCore" */,
+				A1000040001 /* XCLocalSwiftPackageReference "Packages/ScaleUI" */,
+			);
+			productRefGroup = A1000000500 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1000000600 /* ScaleKeeper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1000000620 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000020001 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1000000610 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001001 /* ScaleKeeperApp.swift in Sources */,
+				A1000002001 /* AppState.swift in Sources */,
+				A1000002HUB2 /* QuickActionsHubView.swift in Sources */,
+				A1000003001 /* RootView.swift in Sources */,
+				A1000010001 /* DashboardView.swift in Sources */,
+				A1000011001 /* DashboardViewModel.swift in Sources */,
+				A1000012001 /* CollectionView.swift in Sources */,
+				A1000013001 /* AddAnimalView.swift in Sources */,
+				A1000014001 /* AnimalDetailView.swift in Sources */,
+				A1000015001 /* FeedingView.swift in Sources */,
+				A1BATCH00002 /* BatchFeedingView.swift in Sources */,
+				A1000016001 /* BreedingView.swift in Sources */,
+				A1000017001 /* SettingsView.swift in Sources */,
+				A1000018001 /* FeedingForms.swift in Sources */,
+				A1000019001 /* HealthForms.swift in Sources */,
+				A100001A001 /* BreedingForms.swift in Sources */,
+				A100001B001 /* PhotoViews.swift in Sources */,
+				A100001C001 /* SettingsSubviews.swift in Sources */,
+				A100001D001 /* EnclosureView.swift in Sources */,
+				A100001E001 /* EnclosureDetailView.swift in Sources */,
+				A100001F001 /* EnclosureForms.swift in Sources */,
+				A1000020001M /* MedicationView.swift in Sources */,
+				A1000021001M /* MedicationForms.swift in Sources */,
+				A1000022001B /* BiometricsView.swift in Sources */,
+				A1000023001B /* BiometricsForms.swift in Sources */,
+				A1000024001BR /* BrumationView.swift in Sources */,
+				A1000025001BR /* BrumationForms.swift in Sources */,
+				A1000026001FS /* FeedingScheduleForms.swift in Sources */,
+				A1000027001CAL /* CalendarView.swift in Sources */,
+				A1000028001CARE /* CareView.swift in Sources */,
+				A1000029001QN /* QuickNoteView.swift in Sources */,
+				A100002A001TO /* ThemeOnboardingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1000001100 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A1000001200 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A1000001300 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScaleKeeper/ScaleKeeper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScaleKeeper/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ScaleKeeper;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scalekeeper.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1000001400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScaleKeeper/ScaleKeeper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScaleKeeper/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ScaleKeeper;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scalekeeper.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1000000700 /* Build configuration list for PBXNativeTarget "ScaleKeeper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000001300 /* Debug */,
+				A1000001400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000000900 /* Build configuration list for PBXProject "ScaleKeeper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000001100 /* Debug */,
+				A1000001200 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A1000040000 /* XCLocalSwiftPackageReference "Packages/ScaleCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/ScaleCore;
+		};
+		A1000040001 /* XCLocalSwiftPackageReference "Packages/ScaleUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/ScaleUI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1000030000 /* ScaleCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ScaleCore;
+		};
+		A1000031000 /* ScaleUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ScaleUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A1000000800 /* Project object */;
+}
