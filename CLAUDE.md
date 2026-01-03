@@ -4,6 +4,37 @@
 
 ---
 
+## MAINTAINING THIS FILE (CRITICAL)
+
+**You MUST update this CLAUDE.md as you develop the app.**
+
+This file is the living context for all Claude instances working on this project. When you make progress, record it here so future instances don't lose context.
+
+### When to Update
+
+| Trigger | What to Update |
+|---------|----------------|
+| Feature completed | Add to "What's Built" |
+| Starting new work | Add to "In Progress" |
+| Bug discovered | Add to "Known Issues" |
+| Architectural decision made | Add to "Key Decisions" |
+| Pattern or gotcha discovered | Add to "App-Specific Knowledge" |
+| Context file created | Add to "Reading List" |
+| End of work session | Review and update all sections |
+
+### Creating Additional Context Files
+
+If you need to capture detailed context (design decisions, complex flows, technical specs), create separate files and reference them in the **Reading List** section below.
+
+Recommended locations:
+- `docs/` - General documentation
+- `docs/decisions/` - Architectural Decision Records (ADRs)
+- `docs/context/` - Deep context files for Claude
+
+**Always add new context files to the Reading List.**
+
+---
+
 ## THE VISION (Why This Matters)
 
 This app is part of **IroraForge** - a platform for mass-producing niche apps using AI.
@@ -76,6 +107,46 @@ These systems are already built and shared across all Irora apps. **USE them, do
 - **Location:** `Irora-dev/suite-md-files` repository
 - **Your job:** Follow the design specs exactly
 - **NOT your job:** Inventing new colors, patterns, or components
+
+---
+
+## IRORAFORGE RESOURCES (Read Before Building)
+
+Before building anything, check if it already exists in the shared infrastructure. **Don't reinvent—use what's there.**
+
+### Resource Documentation
+
+These docs are written specifically for Claude instances. They summarize what's available without requiring you to explore all infrastructure repos.
+
+| Resource | Location | When to Read |
+|----------|----------|--------------|
+| **Component Library** | `irora-platform/docs/claude-resources/COMPONENTS.md` | Before building any UI element |
+| **Design System** | `irora-platform/docs/claude-resources/DESIGN.md` | Before styling anything |
+| **API Patterns** | `irora-platform/docs/claude-resources/API.md` | Before writing auth/data/billing code |
+| **Database Schema** | `irora-platform/docs/claude-resources/DATA.md` | Before storing or querying data |
+| **Index** | `irora-platform/docs/claude-resources/INDEX.md` | Overview of all resources |
+
+### How to Access
+
+```bash
+# From any directory - read via GitHub
+gh api repos/Irora-dev/irora-platform/contents/docs/claude-resources/COMPONENTS.md --jq '.content' | base64 -d
+
+# Or clone irora-platform and read locally
+cat ~/path/to/irora-platform/docs/claude-resources/COMPONENTS.md
+```
+
+### Quick Decision Tree
+
+```
+Building a UI element?     → Check COMPONENTS.md first
+Need colors/fonts/spacing? → Check DESIGN.md first
+Doing auth/data/billing?   → Check API.md first
+Storing user data?         → Check DATA.md first
+None of the above?         → Build it, document in your CLAUDE.md
+```
+
+**Rule:** If it feels "generic" (button, card, auth flow, data storage), it probably exists. Check before building.
 
 ---
 
@@ -434,6 +505,106 @@ Contact the infrastructure team. Don't try to work around the system.
 
 ---
 
+## Reading List
+
+*Files to read for deeper understanding. Check these before starting work.*
+
+### IroraForge Shared Resources (Read First)
+
+| Resource | Location | What You'll Learn |
+|----------|----------|-------------------|
+| Components | `irora-platform/docs/claude-resources/COMPONENTS.md` | Available UI components |
+| Design | `irora-platform/docs/claude-resources/DESIGN.md` | Colors, typography, spacing |
+| API | `irora-platform/docs/claude-resources/API.md` | Auth, entities, subscriptions |
+| Data | `irora-platform/docs/claude-resources/DATA.md` | Database schema, queries |
+
+### App-Specific Context
+
+| File | Purpose | Priority |
+|------|---------|----------|
+| `spec.md` | App specification (if exists) | High |
+| `docs/` | App documentation folder | Medium |
+
+*Add new context files here as you create them during development.*
+
+---
+
+## Current State
+
+*Update this section as the app develops. Remove items when no longer relevant.*
+
+### What's Built
+- *(nothing yet - update as features are completed)*
+
+### In Progress
+- *(nothing yet - update when starting work)*
+
+### Known Issues
+- *(none yet - track bugs and issues here)*
+
+### Key Decisions
+- *(none yet - record architectural and design decisions)*
+
+---
+
+## App-Specific Knowledge
+
+*Record patterns, gotchas, and learnings specific to this app. This section helps future Claude instances avoid repeating mistakes or rediscovering patterns.*
+
+### Patterns Established
+- *(none yet)*
+
+### Gotchas & Warnings
+- *(none yet)*
+
+### Integration Notes
+- *(none yet)*
+
+---
+
+## On First Load: Discovery Protocol
+
+**If you see "BLANK_SLATE" at the end of this file**, this CLAUDE.md has not yet been customized. Before starting work:
+
+### Step 1: Read Shared Resources
+Familiarize yourself with the IroraForge infrastructure:
+- `irora-platform/docs/claude-resources/INDEX.md` - Overview
+- Skim COMPONENTS.md, DESIGN.md, API.md, DATA.md to know what exists
+
+### Step 2: Explore This Repository
+- Check what files and code already exist
+- Assess the state: Is this a new project, in progress, or complete?
+
+### Step 3: If Work Exists
+- Read through the codebase to understand what's been built
+- Check git history for context on decisions (`git log --oneline -20`)
+- Review any existing docs, comments, or spec.md
+
+### Step 4: Interview the Developer (If Needed)
+If the project state is unclear or complex, ask the developer:
+- "Can you explain the vision for this app?"
+- "What's the current state of development?"
+- "What should I focus on?"
+- "Are there any gotchas I should know about?"
+
+### Step 5: Update This File
+- Fill in the "Current State" section
+- Add to "App-Specific Knowledge"
+- Update the "Reading List" with any context files you discover or create
+- **Remove the BLANK_SLATE marker** at the end of this file
+
+### Step 6: Create Context Files (If Needed)
+If you learn important context that future Claude instances should know:
+- Create files in `docs/context/` or `docs/decisions/`
+- Add them to the Reading List above
+- Examples: `docs/context/ARCHITECTURE_DECISIONS.md`, `docs/context/KNOWN_ISSUES.md`
+
+**Once you've captured context, remove the BLANK_SLATE marker to signal this file is customized.**
+
+---
+
 *This app is part of the Irora platform. Infrastructure is managed centrally - you focus on building features.*
 
 *Generated: 2026-01-03*
+
+<!-- BLANK_SLATE - Remove this marker after first context update -->
