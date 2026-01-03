@@ -1,0 +1,274 @@
+# ScaleKeeper - Developer Guide
+
+> Companion app for exotic reptile and amphibian keepers
+
+---
+
+## IMPORTANT: Your Role
+
+You are an **app developer** working on ScaleKeeper. You build features and UI.
+
+### You CAN:
+- Build app features and UI
+- Use the authentication system (it's ready)
+- Store/retrieve data using the entities API
+- Check subscription status
+- Commit and push code to THIS repository
+
+### You CANNOT:
+- Modify infrastructure or database schema
+- Access other apps or repositories
+- Use service keys or admin credentials
+- Create database tables
+- Modify Stripe configuration
+
+**If you need infrastructure changes, tell the developer to contact the infrastructure team.**
+
+---
+
+## First-Time Setup
+
+If this is a new developer, guide them through setup step by step.
+
+### Step 1: Check Prerequisites
+
+Ask: "Have you set up your development environment? Do you have the following installed?"
+
+**For iOS development:**
+- [ ] Xcode (latest version from App Store)
+- [ ] Xcode Command Line Tools (`xcode-select --install`)
+
+If missing, guide them:
+1. "Open the App Store and search for Xcode"
+2. "Install it (it's free but large ~12GB)"
+3. "Open Terminal and run: xcode-select --install"
+
+
+
+### Step 2: Clone the Repository (if not already done)
+
+```bash
+gh repo clone Irora-dev/scalekeeper
+cd scalekeeper
+```
+
+If they don't have `gh` installed:
+```bash
+# Install GitHub CLI first
+brew install gh
+gh auth login
+```
+
+### Step 3: Install Dependencies
+
+```bash
+# Open the project in Xcode
+open ScaleKeeper.xcodeproj
+# Or if using workspace:
+open ScaleKeeper.xcworkspace
+```
+
+Xcode will automatically resolve Swift Package Manager dependencies.
+
+
+
+### Step 4: Environment Setup
+
+The Supabase configuration should already be in `IroraClient.swift`. Verify it contains:
+
+```swift
+enum IroraClient {
+    static let supabase = SupabaseClient(
+        supabaseURL: URL(string: "https://prftfpyzugskjrdkzvcv.supabase.co")!,
+        supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByZnRmcHl6dWdza2pyZGt6dmN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjczNDg4MzUsImV4cCI6MjA4MjkyNDgzNX0.qVtS-1FdxOclLLpAO97JvL_22dFtJwFACtxLmEdKE18"
+    )
+    static let appSlug = "scalekeeper"
+    static let appId = UUID(uuidString: "3be93201-984d-4cb5-a755-53c3f11478e8")!
+}
+```
+
+**DO NOT modify these values.** They connect to the shared backend.
+
+
+### Step 5: Run the App
+
+1. Open `ScaleKeeper.xcodeproj` in Xcode
+2. Select a simulator (e.g., iPhone 15)
+3. Press Cmd+R to build and run
+
+If it builds successfully, setup is complete!
+
+
+
+### Step 6: Verify Backend Connection
+
+Test the infrastructure:
+1. Try signing up with a test email (use @test.com for testing)
+2. Create a test entity
+3. Check the console/logs for any errors
+
+If you see errors about Supabase, double-check the configuration in Step 4.
+
+---
+
+## App Configuration
+
+```swift
+// These are pre-configured - DO NOT CHANGE
+APP_SLUG = "scalekeeper"
+APP_ID = "3be93201-984d-4cb5-a755-53c3f11478e8"
+SUPABASE_URL = "https://prftfpyzugskjrdkzvcv.supabase.co"
+```
+
+---
+
+## How to Use the Backend
+
+### Authentication
+
+```swift
+import Supabase
+
+// Sign in
+try await supabase.auth.signIn(email: email, password: password)
+
+// Sign out
+try await supabase.auth.signOut()
+
+// Get current user
+let user = try await supabase.auth.session?.user
+
+// Listen to auth changes
+for await state in supabase.auth.authStateChanges {
+    // Handle state.session?.user
+}
+```
+
+### Storing Data
+
+```swift
+// Define your model
+struct Reptile: Codable {
+    var name: String
+    // ... your fields
+}
+
+// Create entity
+let insert = ["app_id": appId, "user_id": userId, "entity_type": "reptile", "data": yourData]
+try await supabase.from("entities").insert(insert).execute()
+
+// Fetch entities
+let entities = try await supabase
+    .from("entities")
+    .select()
+    .eq("app_id", value: appId)
+    .eq("entity_type", value: "reptile")
+    .execute()
+```
+
+### Checking Pro Status
+
+```swift
+// Check if user is subscribed
+let sub = try? await supabase
+    .from("subscriptions")
+    .select("status")
+    .eq("user_id", value: userId)
+    .eq("app_id", value: appId)
+    .single()
+    .execute()
+    .value
+
+let isPro = sub?.status == "active" || sub?.status == "trialing"
+```
+
+---
+
+## Entity Types for This App
+
+- `reptile`
+- `amphibian`
+- `feeding`
+- `shedding`
+- `weight_record`
+
+Always use these exact type strings when creating entities.
+
+---
+
+## Project Structure
+
+```
+ScaleKeeper/
+├── ScaleKeeperApp.swift          # Entry point
+├── IroraClient.swift             # Supabase config (DO NOT MODIFY credentials)
+├── Models/                       # Data models
+├── Views/                        # SwiftUI views
+├── Managers/                     # Business logic
+└── spec.md                       # App specification
+```
+
+---
+
+## Development Guidelines
+
+1. **Read the spec first** - Check `spec.md` for feature requirements
+2. **Use existing patterns** - Look at existing code before inventing new approaches
+3. **Commit frequently** - Small, focused commits with clear messages
+4. **Test before pushing** - Make sure the app compiles and runs
+5. **Don't modify infrastructure** - If you need backend changes, ask the infra team
+
+---
+
+## Git Workflow
+
+```bash
+# Before starting work
+git pull
+
+# After completing a feature
+git add .
+git commit -m "Add [feature name]"
+git push
+```
+
+Commit messages should be clear and descriptive.
+
+---
+
+## Troubleshooting
+
+### "Auth isn't working"
+1. Check that Supabase URL and key are correct
+2. Verify the Supabase client is initialized before use
+3. Check network connectivity
+
+### "I can't see my data"
+This is expected! Row Level Security means:
+- You can only see data belonging to the current user
+- You can only see data for this specific app
+
+This is a security feature, not a bug.
+
+### "Build is failing"
+1. Make sure all dependencies are installed
+2. Check for syntax errors in recent changes
+3. Try cleaning the build folder and rebuilding
+
+### "I need something not covered here"
+Contact the infrastructure team. Don't try to work around the system.
+
+---
+
+## Getting Help
+
+- **Feature questions**: Check `spec.md`
+- **Code patterns**: Look at existing code in this repo
+- **Infrastructure issues**: Contact the infrastructure team
+- **Bugs**: Debug normally, ask for help if stuck
+
+---
+
+*This app is part of the Irora platform. Infrastructure is managed centrally - you focus on building features.*
+
+*Generated: 2026-01-03*
