@@ -169,6 +169,50 @@ None of the above?         → Build it, document in your CLAUDE.md
 
 ---
 
+## REQUESTING INFRASTRUCTURE CHANGES
+
+If you need something from infrastructure (new API, schema change, new component, integration), you can submit a request.
+
+### How to Submit a Request
+
+Create a file in the infrastructure repo:
+
+```bash
+# Create request file
+gh api repos/Irora-dev/irora-platform/contents/docs/requests/scalekeeper-YOUR-REQUEST.md \
+  -X PUT \
+  -f message="request: scalekeeper - brief description" \
+  -f content="$(echo '# Request: Title
+
+**From:** scalekeeper
+**Date:** '"$(date +%Y-%m-%d)"'
+**Status:** pending
+
+## What I Need
+
+Describe what you need...
+
+## Why I Need It
+
+Explain the use case...
+' | base64)"
+```
+
+Or simply tell the developer: "This feature needs an infrastructure change. Ask the infra team to check `docs/requests/` in irora-platform."
+
+### What You Can Request
+
+- New API endpoints or patterns
+- Database schema changes
+- New shared components
+- Design system additions
+- Third-party integrations
+- New tooling or scripts
+
+Infrastructure Claude reviews requests periodically and will implement, reject, or defer with explanation.
+
+---
+
 ## The Spec Suite - Your Design Bible
 
 This app uses the **Irora Spec Suite** - a library of design specs, components, and patterns. You MUST use these specs for visual consistency.
@@ -562,49 +606,41 @@ Contact the infrastructure team. Don't try to work around the system.
 
 ---
 
-## On First Load: Discovery Protocol
+## "Run Discovery Protocol"
 
-**If you see "BLANK_SLATE" at the end of this file**, this CLAUDE.md has not yet been customized. Before starting work:
+**When the user says "run discovery protocol" or "get up to speed", do this:**
 
-### Step 1: Read Shared Resources
-Familiarize yourself with the IroraForge infrastructure:
-- `irora-platform/docs/claude-resources/INDEX.md` - Overview
-- Skim COMPONENTS.md, DESIGN.md, API.md, DATA.md to know what exists
+### 1. Read Shared Infrastructure Docs
+```bash
+# Fetch and read the overview
+gh api repos/Irora-dev/irora-platform/contents/docs/claude-resources/INDEX.md --jq '.content' | base64 -d
+```
+Then skim: COMPONENTS.md, DESIGN.md, API.md, DATA.md (same pattern)
 
-### Step 2: Explore This Repository
-- Check what files and code already exist
-- Assess the state: Is this a new project, in progress, or complete?
+### 2. Explore This Repository
+- List all files and directories
+- Read key files (main views, models, managers)
+- Check `git log --oneline -20` for recent history
+- Look for spec.md or any docs/
 
-### Step 3: If Work Exists
-- Read through the codebase to understand what's been built
-- Check git history for context on decisions (`git log --oneline -20`)
-- Review any existing docs, comments, or spec.md
+### 3. Summarize What You Found
+Tell the user:
+- What the app does (based on code)
+- What's been built
+- What patterns are being used
+- Any questions you have
 
-### Step 4: Interview the Developer (If Needed)
-If the project state is unclear or complex, ask the developer:
-- "Can you explain the vision for this app?"
-- "What's the current state of development?"
-- "What should I focus on?"
-- "Are there any gotchas I should know about?"
+### 4. Ask Clarifying Questions
+- "What are you trying to build next?"
+- "Anything I should know that isn't in the code?"
 
-### Step 5: Update This File
-- Fill in the "Current State" section
-- Add to "App-Specific Knowledge"
-- Update the "Reading List" with any context files you discover or create
-- **Remove the BLANK_SLATE marker** at the end of this file
+### 5. Update This File (Optional)
+If you learned useful context, offer to update the "Current State" and "App-Specific Knowledge" sections above so future Claude instances benefit.
 
-### Step 6: Create Context Files (If Needed)
-If you learn important context that future Claude instances should know:
-- Create files in `docs/context/` or `docs/decisions/`
-- Add them to the Reading List above
-- Examples: `docs/context/ARCHITECTURE_DECISIONS.md`, `docs/context/KNOWN_ISSUES.md`
-
-**Once you've captured context, remove the BLANK_SLATE marker to signal this file is customized.**
+**This is user-triggered. Run it when asked, not automatically.**
 
 ---
 
 *This app is part of the Irora platform. Infrastructure is managed centrally - you focus on building features.*
 
 *Generated: 2026-01-03*
-
-<!-- BLANK_SLATE - Remove this marker after first context update -->
