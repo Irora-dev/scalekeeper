@@ -279,19 +279,53 @@ ScaleKeeper/
 
 ---
 
-## Git Workflow
+## Git Workflow & Push Reminders
+
+### When to Commit and Push
+
+**IMPORTANT:** You should remind the developer to push their changes at appropriate times:
+
+| Situation | Action |
+|-----------|--------|
+| Feature completed | Commit and push immediately |
+| End of work session | Commit and push all progress |
+| Before switching tasks | Commit current work |
+| After fixing a bug | Commit and push |
+| Before pulling updates | Commit local changes first |
+
+### Commands
 
 ```bash
 # Before starting work
 git pull
 
-# After completing a feature
+# After completing a feature or at session end
 git add .
 git commit -m "Add [feature name]"
 git push
 ```
 
-Commit messages should be clear and descriptive.
+### Commit Message Format
+
+Use clear, descriptive messages:
+- `Add [feature]` - New functionality
+- `Fix [issue]` - Bug fixes
+- `Update [component]` - Changes to existing code
+- `Refactor [area]` - Code improvements without behavior change
+
+### Push Reminders
+
+**As Claude, you should proactively remind the developer:**
+
+1. **After completing any feature:** "This feature is complete. Would you like me to commit and push these changes?"
+
+2. **After significant progress:** "We've made good progress on [feature]. It would be a good idea to commit and push now to save your work."
+
+3. **Before ending a session:** "Before we wrap up, let's commit and push your changes so nothing is lost."
+
+4. **If uncommitted changes accumulate:** "I notice we have several uncommitted changes. Would you like to commit and push now?"
+
+**Never let a session end with unpushed work without reminding the developer.**
 
 ---
 
