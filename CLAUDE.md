@@ -26,6 +26,65 @@ You are an **app developer** working on ScaleKeeper. You build features and UI.
 
 ---
 
+## The Spec Suite - Your Design Bible
+
+This app uses the **Irora Spec Suite** - a library of design specs, components, and patterns. You MUST use these specs for visual consistency.
+
+### Accessing the Specs
+
+The spec suite lives at `Irora-dev/suite-md-files`. Access key files:
+
+```bash
+# Design System (colors, typography, spacing)
+gh api repos/Irora-dev/suite-md-files/contents/design/DESIGN_SYSTEM.md --jq '.content' | base64 -d
+
+# Component Library (buttons, cards, inputs)
+gh api repos/Irora-dev/suite-md-files/contents/design/COMPONENT_LIBRARY.md --jq '.content' | base64 -d
+```
+
+Or via URL:
+- https://raw.githubusercontent.com/Irora-dev/suite-md-files/main/design/DESIGN_SYSTEM.md
+- https://raw.githubusercontent.com/Irora-dev/suite-md-files/main/design/COMPONENT_LIBRARY.md
+
+### Theme: Cosmos (Default)
+
+This app uses the **Cosmos** theme - a dark cosmic/nebula aesthetic. Key colors:
+
+| Name | Hex | Usage |
+|------|-----|-------|
+| Cosmic Black | `#0A0A14` | Primary background |
+| Card Background | `#1F1A33` | Cards, elevated surfaces |
+| Nebula Purple | `#8C4DD9` | Primary buttons, actions |
+| Nebula Cyan | `#40D9F2` | Success, completion |
+| Nebula Lavender | `#B38CF2` | Secondary text |
+
+### Using Specs
+
+**Before building any UI:**
+1. Check `DESIGN_SYSTEM.md` for colors, spacing, typography
+2. Check `COMPONENT_LIBRARY.md` for existing component patterns
+3. Use the exact patterns - don't invent new ones
+
+**Example - Need a button?**
+Don't create your own. Use the pattern from COMPONENT_LIBRARY.md:
+
+```swift
+Button(action: {}) {
+    Text("Label")
+        .font(.system(size: 17, weight: .semibold))
+        .foregroundColor(.white)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 18)
+        .background(
+            RoundedRectangle(cornerRadius: 14)
+                .fill(Color.nebulaPurple)
+        )
+        .shadow(color: .nebulaPurple.opacity(0.4), radius: 8)
+}
+```
+
+---
+
 ## First-Time Setup
 
 If this is a new developer, guide them through setup step by step.
