@@ -102,6 +102,17 @@ public final class Animal {
         return nil
     }
 
+    /// Returns the primary photo, or the most recent photo if no primary is set
+    public var primaryPhoto: AnimalPhoto? {
+        guard let photos = photos, !photos.isEmpty else { return nil }
+        // First try to find one marked as primary
+        if let primary = photos.first(where: { $0.isPrimary }) {
+            return primary
+        }
+        // Otherwise return most recent
+        return photos.sorted { $0.capturedAt > $1.capturedAt }.first
+    }
+
     // MARK: - Init
     public init(
         id: UUID = UUID(),

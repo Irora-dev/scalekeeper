@@ -282,13 +282,31 @@ struct DashboardView: View {
                     appState.presentSheet(.quickNote)
                 }
 
-                QuickActionButton(
-                    title: "Log Feeding",
-                    icon: "fork.knife",
-                    color: themeManager.currentTheme.secondaryAccent
-                ) {
-                    appState.selectedTab = .care
+                NavigationLink {
+                    CalendarView()
+                } label: {
+                    VStack(spacing: ScaleSpacing.sm) {
+                        Image(systemName: "calendar")
+                            .font(.system(size: 24))
+                            .foregroundColor(.nebulaPurple)
+
+                        Text("Calendar")
+                            .font(.scaleCaption)
+                            .foregroundColor(themeManager.currentTheme.textSecondary)
+                            .lineLimit(1)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, ScaleSpacing.lg)
+                    .background(
+                        RoundedRectangle(cornerRadius: ScaleRadius.md)
+                            .fill(themeManager.currentTheme.cardBackground.opacity(0.7))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: ScaleRadius.md)
+                                    .stroke(themeManager.currentTheme.borderColor, lineWidth: 1)
+                            )
+                    )
                 }
+                .buttonStyle(PlainButtonStyle())
 
                 QuickActionButton(
                     title: "Quick Log",
@@ -298,37 +316,6 @@ struct DashboardView: View {
                     appState.isShowingQuickActionsHub = true
                 }
             }
-
-            // View Calendar button
-            NavigationLink {
-                CalendarView()
-            } label: {
-                HStack {
-                    Image(systemName: "calendar")
-                        .font(.system(size: 18))
-                        .foregroundColor(.nebulaPurple)
-
-                    Text("View Calendar")
-                        .font(.scaleSubheadline)
-                        .foregroundColor(.scaleTextPrimary)
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 12))
-                        .foregroundColor(themeManager.currentTheme.textTertiary)
-                }
-                .padding(ScaleSpacing.md)
-                .background(
-                    RoundedRectangle(cornerRadius: ScaleRadius.md)
-                        .fill(themeManager.currentTheme.cardBackground.opacity(0.7))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: ScaleRadius.md)
-                                .stroke(themeManager.currentTheme.borderColor, lineWidth: 1)
-                        )
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
         }
     }
 

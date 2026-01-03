@@ -143,12 +143,12 @@ enum QuickAction: String, CaseIterable {
     case feeding
     case quickFeed
     case weight
+    case length
     case shed
     case healthNote
     case batchFeed
     case quickNote
     case addAnimal
-    case length
 
     var title: String {
         switch self {

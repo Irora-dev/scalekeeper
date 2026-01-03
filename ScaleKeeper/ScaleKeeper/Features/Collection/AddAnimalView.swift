@@ -223,7 +223,8 @@ struct AddAnimalView: View {
                 "Hatch/Birth Date",
                 date: $hatchDate,
                 placeholder: "Select date if known",
-                helpText: "Used to calculate age"
+                helpText: "Used to calculate age",
+                range: Date.distantPast...Date()
             )
         }
     }
@@ -235,7 +236,8 @@ struct AddAnimalView: View {
             ScaleDatePicker(
                 "Acquisition Date",
                 date: $acquisitionDate,
-                helpText: "When did you acquire this animal?"
+                helpText: "When did you acquire this animal?",
+                range: Date.distantPast...Date()
             )
 
             ScaleTextField(

@@ -114,13 +114,18 @@ struct CollectionView: View {
                     .foregroundColor(themeManager.currentTheme.primaryAccent)
                     .frame(maxWidth: .infinity)
                     .frame(height: 70)
+                    .background(
+                        RoundedRectangle(cornerRadius: ScaleRadius.md)
+                            .fill(themeManager.currentTheme.primaryAccent.opacity(0.1))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: ScaleRadius.md)
+                                    .stroke(themeManager.currentTheme.primaryAccent.opacity(0.3), lineWidth: 1)
+                            )
+                    )
                 }
-                .listRowBackground(
-                    RoundedRectangle(cornerRadius: ScaleRadius.md)
-                        .fill(themeManager.currentTheme.primaryAccent.opacity(0.1))
-                )
+                .listRowBackground(Color.clear)
             }
-            .listRowInsets(EdgeInsets(top: 12, leading: 16, bottom: 24, trailing: 16))
+            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
 
             // Animal Cards with Swipe Actions
             Section {
@@ -228,6 +233,7 @@ struct AnimalCardWithSwipe: View {
 
     // Timer for live countdown
     @State private var currentTime = Date()
+    @State private var photoImage: UIImage?
     let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
     var body: some View {
@@ -263,6 +269,21 @@ struct AnimalCardWithSwipe: View {
         .onReceive(timer) { _ in
             currentTime = Date()
         }
+        .onAppear {
+            loadPhoto()
+        }
+        .onChange(of: appState.dataRefreshTrigger) { _, _ in
+            loadPhoto()
+        }
+    }
+
+    private func loadPhoto() {
+        if let photo = animal.primaryPhoto,
+           let imageData = photo.imageData {
+            photoImage = UIImage(data: imageData)
+        } else {
+            photoImage = nil
+        }
     }
 
     // MARK: - Enhanced Card View
@@ -271,15 +292,23 @@ struct AnimalCardWithSwipe: View {
         VStack(spacing: 0) {
             // Main card content
             HStack(spacing: ScaleSpacing.md) {
-                // Photo placeholder
-                ZStack {
-                    RoundedRectangle(cornerRadius: ScaleRadius.md)
-                        .fill(themeManager.currentTheme.primaryAccent.opacity(0.15))
-                    Image(systemName: "lizard.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(themeManager.currentTheme.primaryAccent)
+                // Photo
+                if let uiImage = photoImage {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 60, height: 60)
+                        .clipShape(RoundedRectangle(cornerRadius: ScaleRadius.md))
+                } else {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: ScaleRadius.md)
+                            .fill(themeManager.currentTheme.primaryAccent.opacity(0.15))
+                        Image(systemName: "lizard.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(themeManager.currentTheme.primaryAccent)
+                    }
+                    .frame(width: 60, height: 60)
                 }
-                .frame(width: 60, height: 60)
 
                 // Info section
                 VStack(alignment: .leading, spacing: ScaleSpacing.xs) {

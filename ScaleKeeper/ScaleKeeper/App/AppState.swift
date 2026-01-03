@@ -152,6 +152,7 @@ enum SheetType: Identifiable {
     case addLength(animalID: UUID)
     case addHealthNote(animalID: UUID)
     case addShed(animalID: UUID)
+    case addPhoto(animalID: UUID)
     case quickNote // New: Quick note with animal selector
     case quickNoteForAnimal(animalID: UUID) // New: Quick note for specific animal
     case newPairing
@@ -171,6 +172,7 @@ enum SheetType: Identifiable {
         case .addLength(let id): return "addLength-\(id)"
         case .addHealthNote(let id): return "addHealthNote-\(id)"
         case .addShed(let id): return "addShed-\(id)"
+        case .addPhoto(let id): return "addPhoto-\(id)"
         case .quickNote: return "quickNote"
         case .quickNoteForAnimal(let id): return "quickNoteForAnimal-\(id)"
         case .newPairing: return "newPairing"

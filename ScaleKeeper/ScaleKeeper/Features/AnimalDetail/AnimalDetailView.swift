@@ -9,6 +9,7 @@ struct AnimalDetailView: View {
     @StateObject private var viewModel: AnimalDetailViewModel
     @ObservedObject private var themeManager = ThemeManager.shared
     @State private var selectedTab = 0
+    @State private var photoImage: UIImage?
 
     init(animal: Animal) {
         _viewModel = StateObject(wrappedValue: AnimalDetailViewModel(animal: animal))
@@ -80,6 +81,25 @@ struct AnimalDetailView: View {
                 }
             }
         }
+        .task {
+            await viewModel.load()
+            loadPhoto()
+        }
+        .onChange(of: appState.dataRefreshTrigger) { _, _ in
+            Task {
+                await viewModel.load()
+                loadPhoto()
+            }
+        }
+    }
+
+    private func loadPhoto() {
+        if let photo = viewModel.animal.primaryPhoto,
+           let imageData = photo.imageData {
+            photoImage = UIImage(data: imageData)
+        } else {
+            photoImage = nil
+        }
     }
 
     // MARK: - Header Section
@@ -87,14 +107,26 @@ struct AnimalDetailView: View {
     private var headerSection: some View {
         VStack(spacing: ScaleSpacing.lg) {
             // Photo
-            Circle()
-                .fill(themeManager.currentTheme.primaryAccent.opacity(0.2))
-                .frame(width: 120, height: 120)
-                .overlay(
-                    Image(systemName: "photo")
-                        .font(.system(size: 40))
-                        .foregroundColor(themeManager.currentTheme.primaryAccent.opacity(0.5))
-                )
+            if let uiImage = photoImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(themeManager.currentTheme.primaryAccent.opacity(0.3), lineWidth: 2)
+                    )
+            } else {
+                Circle()
+                    .fill(themeManager.currentTheme.primaryAccent.opacity(0.2))
+                    .frame(width: 120, height: 120)
+                    .overlay(
+                        Image(systemName: "photo")
+                            .font(.system(size: 40))
+                            .foregroundColor(themeManager.currentTheme.primaryAccent.opacity(0.5))
+                    )
+            }
 
             // Basic info
             VStack(spacing: ScaleSpacing.xs) {
@@ -130,20 +162,77 @@ struct AnimalDetailView: View {
                 }
             }
 
-            // Quick actions
-            HStack(spacing: ScaleSpacing.md) {
-                QuickActionButton(title: "Feed", icon: "fork.knife", color: .heatLampAmber) {
-                    appState.presentSheet(.logFeeding(animalID: viewModel.animal.id))
+            // Quick actions - 5 buttons across 2 rows
+            VStack(spacing: ScaleSpacing.sm) {
+                // Top row - 3 buttons
+                HStack(spacing: ScaleSpacing.sm) {
+                    CompactActionButton(title: "Feed", icon: "fork.knife", color: .heatLampAmber) {
+                        appState.presentSheet(.logFeeding(animalID: viewModel.animal.id))
+                    }
+
+                    CompactActionButton(title: "Weight", icon: "scalemass", color: .nebulaCyan) {
+                        appState.presentSheet(.addWeight(animalID: viewModel.animal.id))
+                    }
+
+                    CompactActionButton(title: "Shed", icon: "humidity", color: .nebulaPurple) {
+                        appState.presentSheet(.addShed(animalID: viewModel.animal.id))
+                    }
                 }
 
-                QuickActionButton(title: "Weight", icon: "scalemass", color: .scaleTeal) {
-                    appState.presentSheet(.addWeight(animalID: viewModel.animal.id))
-                }
+                // Bottom row - 2 buttons
+                HStack(spacing: ScaleSpacing.sm) {
+                    CompactActionButton(title: "Health", icon: "cross.case", color: .scaleSuccess) {
+                        appState.presentSheet(.addHealthNote(animalID: viewModel.animal.id))
+                    }
 
-                QuickActionButton(title: "Photo", icon: "camera", color: .shedPink) {
-                    // Add photo
+                    CompactActionButton(title: "Photo", icon: "camera", color: .shedPink) {
+                        appState.presentSheet(.addPhoto(animalID: viewModel.animal.id))
+                    }
                 }
             }
+
+            // Growth & Biometrics link
+            NavigationLink {
+                BiometricsView(animal: viewModel.animal)
+            } label: {
+                HStack {
+                    ZStack {
+                        Circle()
+                            .fill(Color.nebulaCyan.opacity(0.15))
+                            .frame(width: 40, height: 40)
+
+                        Image(systemName: "chart.line.uptrend.xyaxis")
+                            .font(.system(size: 18))
+                            .foregroundColor(.nebulaCyan)
+                    }
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Growth & Biometrics")
+                            .font(.scaleSubheadline)
+                            .foregroundColor(.scaleTextPrimary)
+
+                        Text("Track weight, length & body condition")
+                            .font(.scaleCaption)
+                            .foregroundColor(themeManager.currentTheme.textSecondary)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12))
+                        .foregroundColor(themeManager.currentTheme.textTertiary)
+                }
+                .padding(ScaleSpacing.md)
+                .background(
+                    RoundedRectangle(cornerRadius: ScaleRadius.md)
+                        .fill(themeManager.currentTheme.cardBackground)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: ScaleRadius.md)
+                                .stroke(Color.nebulaCyan.opacity(0.3), lineWidth: 1)
+                        )
+                )
+            }
+            .buttonStyle(PlainButtonStyle())
         }
     }
 
@@ -245,49 +334,6 @@ struct AnimalDetailView: View {
                     }
                 }
             }
-
-            // Growth & Biometrics link
-            NavigationLink {
-                BiometricsView(animal: viewModel.animal)
-            } label: {
-                HStack {
-                    ZStack {
-                        Circle()
-                            .fill(Color.nebulaCyan.opacity(0.15))
-                            .frame(width: 44, height: 44)
-
-                        Image(systemName: "chart.line.uptrend.xyaxis")
-                            .font(.system(size: 20))
-                            .foregroundColor(.nebulaCyan)
-                    }
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Growth & Biometrics")
-                            .font(.scaleSubheadline)
-                            .foregroundColor(.scaleTextPrimary)
-
-                        Text("Track weight, length & body condition")
-                            .font(.scaleCaption)
-                            .foregroundColor(themeManager.currentTheme.textSecondary)
-                    }
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 12))
-                        .foregroundColor(themeManager.currentTheme.textTertiary)
-                }
-                .padding(ScaleSpacing.md)
-                .background(
-                    RoundedRectangle(cornerRadius: ScaleRadius.md)
-                        .fill(themeManager.currentTheme.cardBackground)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: ScaleRadius.md)
-                                .stroke(themeManager.currentTheme.borderColor, lineWidth: 1)
-                        )
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
         }
     }
 
@@ -320,42 +366,6 @@ struct AnimalDetailView: View {
 
     private var healthTab: some View {
         VStack(spacing: ScaleSpacing.lg) {
-            // Biometrics summary with link to full view
-            NavigationLink {
-                BiometricsView(animal: viewModel.animal)
-            } label: {
-                ScaleCard {
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .fill(Color.nebulaCyan.opacity(0.15))
-                                .frame(width: 48, height: 48)
-
-                            Image(systemName: "chart.line.uptrend.xyaxis")
-                                .font(.system(size: 22))
-                                .foregroundColor(.nebulaCyan)
-                        }
-
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Growth & Biometrics")
-                                .font(.scaleHeadline)
-                                .foregroundColor(.scaleTextPrimary)
-
-                            Text("Track weight, length & body condition")
-                                .font(.scaleCaption)
-                                .foregroundColor(themeManager.currentTheme.textSecondary)
-                        }
-
-                        Spacer()
-
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 12))
-                            .foregroundColor(themeManager.currentTheme.textTertiary)
-                    }
-                }
-            }
-            .buttonStyle(PlainButtonStyle())
-
             // Quick Stats
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: ScaleSpacing.md) {
                 ScaleStatCard(
@@ -521,19 +531,18 @@ struct FeedingHistoryRow: View {
 // MARK: - Animal Detail View Model
 
 @MainActor
-@Observable
 final class AnimalDetailViewModel: ObservableObject {
     let animal: Animal
     private let dataService: DataService
     private let biometricsService: BiometricsService
 
-    var recentFeedings: [FeedingEvent] = []
-    var totalFeedings: Int = 0
-    var feedingSuccessRate: Int = 0
+    @Published var recentFeedings: [FeedingEvent] = []
+    @Published var totalFeedings: Int = 0
+    @Published var feedingSuccessRate: Int = 0
 
     // Biometrics
-    var recentWeights: [WeightRecord] = []
-    var recentLengths: [LengthRecord] = []
+    @Published var recentWeights: [WeightRecord] = []
+    @Published var recentLengths: [LengthRecord] = []
 
     var currentWeightText: String {
         if let weight = recentWeights.first {
@@ -571,8 +580,43 @@ final class AnimalDetailViewModel: ObservableObject {
             // Biometrics
             recentWeights = try dataService.fetchWeights(for: animal)
             recentLengths = try biometricsService.lengthHistory(for: animal)
+
+            // Photo is loaded via animal.primaryPhoto computed property
+            // Force a view refresh by triggering objectWillChange
+            objectWillChange.send()
         } catch {
             print("Failed to load animal detail: \(error)")
+        }
+    }
+}
+
+// MARK: - Compact Action Button
+
+struct CompactActionButton: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
+    let title: String
+    let icon: String
+    let color: Color
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.system(size: 18))
+                    .foregroundColor(color)
+
+                Text(title)
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundColor(themeManager.currentTheme.textSecondary)
+                    .lineLimit(1)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, ScaleSpacing.sm)
+            .background(
+                RoundedRectangle(cornerRadius: ScaleRadius.sm)
+                    .fill(color.opacity(0.1))
+            )
         }
     }
 }

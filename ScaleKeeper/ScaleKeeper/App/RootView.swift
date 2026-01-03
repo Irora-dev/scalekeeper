@@ -82,6 +82,10 @@ struct RootView: View {
             AddHealthNoteView(animalID: id)
         case .addShed(let id):
             AddShedView(animalID: id)
+        case .addPhoto(let id):
+            AddPhotoView(animalID: id) {
+                appState.triggerDataRefresh()
+            }
         case .quickNote:
             QuickNoteView()
         case .quickNoteForAnimal(let id):

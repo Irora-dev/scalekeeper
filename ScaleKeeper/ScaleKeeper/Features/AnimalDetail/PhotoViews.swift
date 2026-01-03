@@ -263,8 +263,8 @@ struct AddPhotoView: View {
     let onSave: () -> Void
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var modelContext
     @ObservedObject private var themeManager = ThemeManager.shared
+    private let dataService = DataService.shared
 
     @State private var selectedItem: PhotosPickerItem?
     @State private var selectedImageData: Data?
@@ -382,33 +382,53 @@ struct AddPhotoView: View {
 
         isSaving = true
 
-        // Fetch the animal
-        let predicate = #Predicate<Animal> { $0.id == animalID }
-        let descriptor = FetchDescriptor<Animal>(predicate: predicate)
-
-        guard let animal = try? modelContext.fetch(descriptor).first else {
+        // Fetch the animal using DataService
+        guard let animal = try? dataService.fetchAnimal(byID: animalID) else {
             ScaleToastManager.shared.error("Could not find animal")
             isSaving = false
             return
         }
 
+        // Compress image if needed
+        let compressedData: Data
+        if let uiImage = UIImage(data: imageData) {
+            compressedData = uiImage.jpegData(compressionQuality: 0.8) ?? imageData
+        } else {
+            compressedData = imageData
+        }
+
         // Create photo record
-        let photo = AnimalPhoto(imageData: imageData, capturedAt: capturedDate)
+        let photo = AnimalPhoto(imageData: compressedData, capturedAt: capturedDate)
+
         if !caption.isEmpty {
             photo.caption = caption
         }
-        photo.animal = animal
 
-        animal.photos?.append(photo)
+        // Set as primary if this is the first photo
+        let isFirstPhoto = animal.photos?.isEmpty ?? true
+        if isFirstPhoto {
+            photo.isPrimary = true
+        }
+
+        // Set both sides of the relationship
+        photo.animal = animal
+        if animal.photos == nil {
+            animal.photos = [photo]
+        } else {
+            animal.photos?.append(photo)
+        }
+
+        // Insert photo into context
+        dataService.insert(photo)
 
         do {
-            try modelContext.save()
+            try dataService.save()
             ScaleToastManager.shared.success("Photo saved!")
             ScaleHaptics.success()
             onSave()
             dismiss()
         } catch {
-            ScaleToastManager.shared.error("Failed to save photo")
+            ScaleToastManager.shared.error("Failed to save photo: \(error.localizedDescription)")
             isSaving = false
         }
     }

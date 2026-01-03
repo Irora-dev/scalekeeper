@@ -119,6 +119,28 @@ extension DataService {
         let predicate = #Predicate<Animal> { $0.status == activeStatus }
         return try count(Animal.self, predicate: predicate)
     }
+
+    public func fetchPrimaryPhoto(for animal: Animal) throws -> AnimalPhoto? {
+        let animalID = animal.id
+        // First try to find a photo marked as primary
+        let primaryPredicate = #Predicate<AnimalPhoto> { photo in
+            photo.animal?.id == animalID && photo.isPrimary == true
+        }
+        let primaryDescriptor = FetchDescriptor<AnimalPhoto>(predicate: primaryPredicate)
+        if let primaryPhoto = try modelContext.fetch(primaryDescriptor).first {
+            return primaryPhoto
+        }
+
+        // Fallback to most recent photo
+        let predicate = #Predicate<AnimalPhoto> { photo in
+            photo.animal?.id == animalID
+        }
+        let descriptor = FetchDescriptor<AnimalPhoto>(
+            predicate: predicate,
+            sortBy: [SortDescriptor(\.capturedAt, order: .reverse)]
+        )
+        return try modelContext.fetch(descriptor).first
+    }
 }
 
 // MARK: - Species Operations
